@@ -9,7 +9,7 @@ namespace PadawansTask2
            
             if(count<1)
             {
-                throw new NotImplementedException();
+                throw new ArgumentOutOfRangeException();
             }
             int result=0;
             for (int a=0;a<count;a++)
@@ -19,7 +19,16 @@ namespace PadawansTask2
                 {
                     for (int i=0;i<a;i++)
                     {
-                        result += add;
+                        try
+                        {
+                            checked
+                            {
+                                result += add;
+                            }
+                        }catch(OverflowException)
+                        {
+                            throw new OverflowException();
+                        }
                     }
                 }
             }
