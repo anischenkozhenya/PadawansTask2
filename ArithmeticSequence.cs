@@ -6,30 +6,34 @@ namespace PadawansTask2
     {
         public static int Calculate(int number, int add, int count)
         {
-           
-            if(count<1)
+
+            if (count <= 0)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentException("count <= 0");
             }
-            int result=0;
-            for (int a=0;a<count;a++)
+            int result = 0;
+            for (int a = 0; a < count; a++)
             {
-                result += number;
-                if (a > 0)
+                try
                 {
-                    for (int i=0;i<a;i++)
+                    checked
                     {
-                        try
+                        result += number;
+                    }
+                    if (a > 0)
+                    {
+                        for (int i = 0; i < a; i++)
                         {
                             checked
                             {
                                 result += add;
                             }
-                        }catch(OverflowException)
-                        {
-                            throw new OverflowException();
+
                         }
                     }
+                } catch (OverflowException ex)
+                { 
+                    throw new OverflowException();
                 }
             }
             return result;
